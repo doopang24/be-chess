@@ -1,3 +1,5 @@
+package chess;
+
 import static utils.StringUtils.appendNewLine;
 import static org.junit.jupiter.api.Assertions.*;
 

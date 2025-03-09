@@ -1,3 +1,5 @@
+package chess;
+
 import static utils.StringUtils.appendNewLine;
 
 import pieces.Piece;
