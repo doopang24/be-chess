@@ -21,5 +21,4 @@ public class Rank {
         }
         return builder.toString();
     }
-
 }
