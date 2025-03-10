@@ -107,15 +107,26 @@ public class Board {
         addWhitePiece(Piece.createWhiteRook());
     }
 
+    public void initializeEmpty() {
+        makeEmptyRank();
+        for (int i = 0; i < BOARD_ROW_SIZE; i++) {
+            BOARD.add(emptyRank);
         }
-        BOARD.add(whitePawnList);
-        BOARD.add(whitePieceList);
-
-        System.out.println(showBoard());
     }
 
-    public void initializeEmpty() {
-
+    public void move(String position, Piece piece) {
+        try {
+            isValidNotation(position);
+            int rankIndex = converter.fileToIndex(position.charAt(0));
+            int fileIndex = converter.rankToIndex(position.charAt(1));
+            if (BOARD.get(rankIndex).isEmpty(fileIndex)) {
+                BOARD.get(rankIndex).putPiece(fileIndex, piece);
+            } else {
+                throw new IllegalArgumentException("빈 자리가 아닙니다.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     // 출력할 체스판 구성
