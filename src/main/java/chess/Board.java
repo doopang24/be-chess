@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Board {
 
+    LocationConverter converter = new LocationConverter();
+
     private final List<Rank> BOARD = new ArrayList<>();
 
     private final int BOARD_ROW_SIZE = 8;
@@ -101,6 +103,19 @@ public class Board {
         return count;
     }
 
+    public Piece findPiece(String notation) {
+        while (true) {
+            try {
+                isValidNotation(notation);
+                int rankIndex = converter.getRowValue(notation.charAt(0));
+                int fileIndex = converter.getColumnValue(notation.charAt(1));
+                return BOARD.get(rankIndex).findPieceFromRank(fileIndex);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     private void isValidNotation(String notation) {
         if (notation.length() != 2) throw new IllegalArgumentException("올바른 입력이 아닙니다.");
         char file = notation.charAt(0);
@@ -111,6 +126,7 @@ public class Board {
             throw new IllegalArgumentException("올바른 랭크값이 아닙니다.");
         }
     }
+
     public int getInitialPieceTotalCount() {
         return pieceCount;
     }
