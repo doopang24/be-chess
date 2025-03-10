@@ -31,4 +31,8 @@ public class Rank {
         }
         return count;
     }
+
+    public Piece findPieceFromRank(int index) {
+        return RANK.get(index);
+    }
 }
