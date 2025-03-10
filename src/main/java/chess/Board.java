@@ -14,38 +14,38 @@ public class Board {
     private final List<Rank> BOARD = new ArrayList<>();
 
     private final int BOARD_ROW_SIZE = 8;
-    private final int INITIAL_BLANK_SIZE = 4;
+    private final int INITIAL_EMPTY_RANK_SIZE = 4;
 
-    private Rank whitePieceList = new Rank();
-    private Rank blackPieceList = new Rank();
-    private Rank whitePawnList = new Rank();
-    private Rank blackPawnList = new Rank();
-    private Rank blank = new Rank();
+    private Rank whitePiece = new Rank();
+    private Rank blackPiece = new Rank();
+    private Rank whitePawn = new Rank();
+    private Rank blackPawn = new Rank();
+    private Rank emptyRank = new Rank();
 
     public int pieceCount = 0;
 
-    private void addWhitePiece(Piece whitePiece) {
-        whitePieceList.addRank(whitePiece);
+    private void addWhitePiece(Piece Piece) {
+        whitePiece.addRank(Piece);
         pieceCount++;
     }
 
-    private void addWhitePawn(Piece whitePawn) {
-        whitePawnList.addRank(whitePawn);
+    private void addWhitePawn(Piece Pawn) {
+        whitePawn.addRank(Pawn);
         pieceCount++;
     }
 
-    private void addBlackPiece(Piece blackPiece) {
-        blackPieceList.addRank(blackPiece);
+    private void addBlackPiece(Piece Piece) {
+        blackPiece.addRank(Piece);
         pieceCount++;
     }
 
-    private void addBlackPawn(Piece blackPawn) {
-        blackPawnList.addRank(blackPawn);
+    private void addBlackPawn(Piece Pawn) {
+        blackPawn.addRank(Pawn);
         pieceCount++;
     }
 
     private void addBlank() {
-        blank.addRank(Piece.createBlank());
+        emptyRank.addRank(Piece.createBlank());
     }
 
     public void initialize() {
