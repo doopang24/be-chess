@@ -1,6 +1,39 @@
 package pieces;
 
 public class Piece {
+
+    public enum Color {
+        WHITE,
+        BLACK,
+        NOCOLOR;
+    }
+
+    public enum Type {
+        PAWN('p'),
+        ROOK('r'),
+        KNIGHT('n'),
+        BISHOP('b'),
+        QUEEN('q'),
+        KING('k'),
+        NO_PIECE('.');
+
+        private char representation;
+
+        // private 생성자로 이미 초기화해놓은 문자('p'등)를 private char representation 필드에 할당
+        Type(char representation) {
+            this.representation = representation;
+        }
+
+        public char getWhiteRepresentation() {
+            return representation;
+        }
+
+        public char getBlackRepresentation() {
+            return Character.toUpperCase(representation);
+        }
+    }
+
+
     public static final String COLOR_WHITE = "white";
     public static final String COLOR_BLACK = "black";
     public static final char PAWN_WHITE = 'p';
