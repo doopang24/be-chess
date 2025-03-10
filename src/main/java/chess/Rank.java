@@ -37,4 +37,13 @@ public class Rank {
     public Piece findPieceFromRank(int index) {
         return RANK.get(index);
     }
+
+    // 해당 index 자리가 비었는지 확인
+    public boolean isEmpty(int index) {
+        return RANK.get(index).getRepresentation() == '.';
+    }
+
+    public void putPiece(int index, Piece piece) {
+        RANK.set(index, piece);
+    }
 }
