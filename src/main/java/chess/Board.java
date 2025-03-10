@@ -101,6 +101,16 @@ public class Board {
         return count;
     }
 
+    private void isValidNotation(String notation) {
+        if (notation.length() != 2) throw new IllegalArgumentException("올바른 입력이 아닙니다.");
+        char file = notation.charAt(0);
+        char rank = notation.charAt(1);
+        if (!Character.isLetter(file) || !Character.isLowerCase(file)) {
+            throw new IllegalArgumentException("올바른 파일값이 아닙니다.");
+        } else if (!Character.isDigit(rank)) {
+            throw new IllegalArgumentException("올바른 랭크값이 아닙니다.");
+        }
+    }
     public int getInitialPieceTotalCount() {
         return pieceCount;
     }
