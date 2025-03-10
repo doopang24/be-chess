@@ -22,7 +22,7 @@ public class Rank {
         return builder.toString();
     }
 
-    public int countPieceType(Piece.Color color, Piece.Type type) {
+    public int countPieceFromRank(Piece.Color color, Piece.Type type) {
         int count = 0;
         for (Piece piece : RANK) {
             if (piece.getColor() == color && piece.getType() == type) {

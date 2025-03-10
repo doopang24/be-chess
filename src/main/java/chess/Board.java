@@ -93,7 +93,15 @@ public class Board {
         return builder.toString();
     }
 
-    public int pieceCount() {
+    public int countPieceFromBoard(Piece.Color color, Piece.Type type) {
+        int count = 0;
+        for (Rank rank : BOARD) {
+            count += rank.countPieceFromRank(color, type);
+        }
+        return count;
+    }
+
+    public int getInitialPieceTotalCount() {
         return pieceCount;
     }
 }
