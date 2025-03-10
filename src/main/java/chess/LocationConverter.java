@@ -20,4 +20,12 @@ public class LocationConverter {
         }
         return position;
     }
+    // 해당 index 의 rank 반환
+    public int indexToRank(int index) {
+        return RANK.charAt(index) - '0';
+    }
+
+    public String getFILE() {
+        return FILE;
+    }
 }
