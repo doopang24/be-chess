@@ -49,6 +49,24 @@ public class Board {
     }
 
     public void initialize() {
+        makeBlackPieceRank();
+        makeBlackPawnRank();
+        makeEmptyRank();
+        makeWhitePawnRank();
+        makeWhitePieceRank();
+
+        BOARD.add(blackPiece);
+        BOARD.add(blackPawn);
+        for (int i = 0; i < INITIAL_EMPTY_RANK_SIZE; i++) {
+            BOARD.add(emptyRank);
+        }
+        BOARD.add(whitePawn);
+        BOARD.add(whitePiece);
+
+        System.out.println(showBoard());
+    }
+
+    private void makeBlackPieceRank() {
         addBlackPiece(Piece.createBlackRook());
         addBlackPiece(Piece.createBlackKnight());
         addBlackPiece(Piece.createBlackBishop());
@@ -57,15 +75,28 @@ public class Board {
         addBlackPiece(Piece.createBlackBishop());
         addBlackPiece(Piece.createBlackKnight());
         addBlackPiece(Piece.createBlackRook());
+    }
+
+    private void makeBlackPawnRank() {
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
             addBlackPawn(Piece.createBlackPawn());
         }
+    }
+
+    // 빈 랭크 생성
+    private void makeEmptyRank() {
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
             addBlank();
         }
+    }
+
+    private void makeWhitePawnRank() {
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
             addWhitePawn(Piece.createWhitePawn());
         }
+    }
+
+    private void makeWhitePieceRank() {
         addWhitePiece(Piece.createWhiteRook());
         addWhitePiece(Piece.createWhiteKnight());
         addWhitePiece(Piece.createWhiteBishop());
@@ -74,12 +105,8 @@ public class Board {
         addWhitePiece(Piece.createWhiteBishop());
         addWhitePiece(Piece.createWhiteKnight());
         addWhitePiece(Piece.createWhiteRook());
+    }
 
-
-        BOARD.add(blackPieceList);
-        BOARD.add(blackPawnList);
-        for (int i = 0; i < INITIAL_BLANK_SIZE; i++) {
-            BOARD.add(blank);
         }
         BOARD.add(whitePawnList);
         BOARD.add(whitePieceList);
