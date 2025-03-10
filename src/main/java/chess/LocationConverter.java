@@ -2,24 +2,29 @@ package chess;
 
 public class LocationConverter {
 
-    private final String ROW = "87654321";
-    private final String COLUMN = "abcdefgh";
+    // 변환 기준
+    private final String RANK = "87654321";
+    private final String FILE = "abcdefgh";
 
-    public int getRowValue(char input) {
-        return findPosition(input, ROW);
+    // 입력받은 file 의 index 반환
+    public int fileToIndex(char inputFile) {
+        return findPosition(inputFile, FILE);
     }
 
-    public int getColumnValue(char input) {
-        return findPosition(input, COLUMN);
+    // 입력받은 rank 의 index 반환
+    public int rankToIndex(char inputRank) {
+        return findPosition(inputRank, RANK);
     }
 
-    private int findPosition(char input, String string) {
+    // 입력받은 위치의 index 찾기
+    private int findPosition(char input, String location) {
         int position = 0;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.indexOf(input) == i) position = i;
+        for (int i = 0; i < location.length(); i++) {
+            if (location.indexOf(input) == i) position = i;
         }
         return position;
     }
+
     // 해당 index 의 rank 반환
     public int indexToRank(int index) {
         return RANK.charAt(index) - '0';

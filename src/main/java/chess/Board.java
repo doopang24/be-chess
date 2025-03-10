@@ -87,14 +87,25 @@ public class Board {
         System.out.println(showBoard());
     }
 
+    public void initializeEmpty() {
+
+    }
+
+    // 출력할 체스판 구성
     public String showBoard() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
-            builder.append(appendNewLine(BOARD.get(i).getRankView()));
+            builder.append(appendNewLine(BOARD.get(i).getRankView())).append(" ").append(converter.indexToRank(i));
         }
+        builder.append(appendNewLine("")).append(converter.getFILE());
         return builder.toString();
     }
 
+    public void printBoard() {
+        System.out.println(showBoard());
+    }
+
+    // 체스판에 해당 기물이 몇 개 있는지 반환
     public int countPieceFromBoard(Piece.Color color, Piece.Type type) {
         int count = 0;
         for (Rank rank : BOARD) {
@@ -103,12 +114,13 @@ public class Board {
         return count;
     }
 
+    // 입력받은 위치에 있는 기물 반환
     public Piece findPiece(String notation) {
         while (true) {
             try {
                 isValidNotation(notation);
-                int rankIndex = converter.getRowValue(notation.charAt(0));
-                int fileIndex = converter.getColumnValue(notation.charAt(1));
+                int rankIndex = converter.fileToIndex(notation.charAt(0));
+                int fileIndex = converter.rankToIndex(notation.charAt(1));
                 return BOARD.get(rankIndex).findPieceFromRank(fileIndex);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -116,6 +128,7 @@ public class Board {
         }
     }
 
+    // 위치 입력값 검증
     private void isValidNotation(String notation) {
         if (notation.length() != 2) throw new IllegalArgumentException("올바른 입력이 아닙니다.");
         char file = notation.charAt(0);

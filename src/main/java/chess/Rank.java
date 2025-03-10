@@ -8,12 +8,12 @@ import java.util.List;
 public class Rank {
 
     private final List<Piece> RANK = new ArrayList<>();
-    private final int RANK_SIZE = 8;
 
     public void addRank(Piece piece) {
         RANK.add(piece);
     }
 
+    // rank 의 representation 덩어리 반환
     public String getRankView() {
         StringBuilder builder = new StringBuilder();
         for (Piece piece : RANK) {
@@ -22,6 +22,7 @@ public class Rank {
         return builder.toString();
     }
 
+    // 랭크에 몇 개 있는지 반환
     public int countPieceFromRank(Piece.Color color, Piece.Type type) {
         int count = 0;
         for (Piece piece : RANK) {
@@ -32,6 +33,7 @@ public class Rank {
         return count;
     }
 
+    // 해당 index 의 Piece 반환
     public Piece findPieceFromRank(int index) {
         return RANK.get(index);
     }
