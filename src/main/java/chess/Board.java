@@ -20,7 +20,6 @@ public class Board {
     private Rank blackPiece = new Rank();
     private Rank whitePawn = new Rank();
     private Rank blackPawn = new Rank();
-    private Rank emptyRank = new Rank();
 
     public int pieceCount = 0;
 
@@ -44,21 +43,16 @@ public class Board {
         pieceCount++;
     }
 
-    private void addBlank() {
-        emptyRank.addRank(Piece.createBlank());
-    }
-
     public void initialize() {
         makeBlackPieceRank();
         makeBlackPawnRank();
-        makeEmptyRank();
         makeWhitePawnRank();
         makeWhitePieceRank();
 
         BOARD.add(blackPiece);
         BOARD.add(blackPawn);
         for (int i = 0; i < INITIAL_EMPTY_RANK_SIZE; i++) {
-            BOARD.add(emptyRank);
+            BOARD.add(makeEmptyRank());
         }
         BOARD.add(whitePawn);
         BOARD.add(whitePiece);
@@ -83,11 +77,13 @@ public class Board {
         }
     }
 
-    // 빈 랭크 생성
-    private void makeEmptyRank() {
+    // 새로운 빈 랭크 생성
+    private Rank makeEmptyRank() {
+        Rank rank = new Rank();
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
-            addBlank();
+            rank.addRank(Piece.createBlank());
         }
+        return rank;
     }
 
     private void makeWhitePawnRank() {
@@ -110,7 +106,7 @@ public class Board {
     public void initializeEmpty() {
         makeEmptyRank();
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
-            BOARD.add(emptyRank);
+            BOARD.add(makeEmptyRank());
         }
     }
 
