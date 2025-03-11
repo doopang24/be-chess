@@ -129,7 +129,7 @@ public class Board {
     public String showBoard() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < BOARD_ROW_SIZE; i++) {
-            builder.append(appendNewLine(BOARD.get(i).getRankView())).append(" ").append(converter.indexToRank(i));
+            builder.append(BOARD.get(i).getRankView()).append(" ").append(appendNewLine(converter.indexToRank(i)));
         }
         builder.append(appendNewLine("")).append(converter.getFILE());
         return builder.toString();
