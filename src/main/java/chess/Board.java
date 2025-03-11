@@ -171,6 +171,45 @@ public class Board {
         }
     }
 
+    // 색깔에 따른 점수 계산
+    public double calculatePoint(Piece.Color color) {
+        double answer = 0.0;
+        boolean pawnDuplicationCheck;
+        for (int i = 0; i < FILE_SIZE; i++) {
+            pawnDuplicationCheck = isPawnDuplicatedInFile(color, i);    // 새로줄 내에 폰 중복 여부
+            for (int j = 0; j < RANK_SIZE; j++) {
+                Piece piece = BOARD.get(j).findPieceFromRank(i);
+                if (piece.getColor() == color) {
+                    if (piece.getType() == Piece.Type.PAWN && pawnDuplicationCheck) {
+                        answer += piece.getType().getDefaultPoint() / 2.0;
+                        continue;
+                    }
+                    answer += piece.getType().getDefaultPoint();
+                }
+            }
+        }
+        return answer;
+    }
+
+    // 세로줄 내에 같은 색 폰이 2개 이상 있으면 true
+    private boolean isPawnDuplicatedInFile(Piece.Color color, int fileIndex) {
+        Piece piece;
+        int count = 0;
+        if (color == Piece.Color.WHITE) {
+            piece = Piece.createWhitePawn();
+        } else {
+            piece = Piece.createBlackPawn();
+        }
+
+        for (Rank rank : BOARD) {
+            if (rank.findPieceFromRank(fileIndex).equals(piece)) {
+                count++;
+                if (count >= 2) return true;
+            }
+        }
+        return false;
+    }
+
     public int getInitialPieceTotalCount() {
         return pieceCount;
     }
