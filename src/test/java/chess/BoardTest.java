@@ -44,6 +44,7 @@ public class BoardTest {
         board.initializeEmpty();
 
         addPiece("b6", Piece.createBlackPawn());
+        addPiece("b5", Piece.createBlackPawn());
         addPiece("e6", Piece.createBlackQueen());
         addPiece("b8", Piece.createBlackKing());
         addPiece("c8", Piece.createBlackRook());
