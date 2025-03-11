@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.Objects;
+
 public class Piece {
 
     public enum Color {
@@ -125,5 +127,13 @@ public class Piece {
 
     public boolean isWhite() {
         return COLOR == Color.WHITE;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Piece piece = (Piece) obj;
+        return COLOR == piece.COLOR && this.TYPE == piece.TYPE;
     }
 }
