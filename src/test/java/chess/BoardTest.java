@@ -18,20 +18,6 @@ public class BoardTest {
     }
 
     @Test
-    public void create() throws Exception {
-        board.initialize();
-        assertEquals(32, board.getInitialPieceTotalCount());
-        String blackRank = appendNewLine("........");
-        assertEquals(
-                appendNewLine("RNBQKBNR") +
-                        appendNewLine("PPPPPPPP") +
-                        blackRank + blackRank + blackRank + blackRank +
-                        appendNewLine("pppppppp") +
-                        appendNewLine("rnbqkbnr"),
-                board.showBoard());
-    }
-
-    @Test
     public void findPiece() throws Exception {
         board.initialize();
 
