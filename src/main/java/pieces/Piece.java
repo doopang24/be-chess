@@ -1,7 +1,5 @@
 package pieces;
 
-import java.util.Objects;
-
 public class Piece {
 
     public enum Color {
@@ -22,7 +20,6 @@ public class Piece {
         private char representation;
         private double defaultPoint;
 
-        // private 생성자로 이미 초기화해놓은 문자('p'등)를 private char representation 필드에 할당
         Type(char representation, double defaultPoint) {
             this.representation = representation;
             this.defaultPoint = defaultPoint;

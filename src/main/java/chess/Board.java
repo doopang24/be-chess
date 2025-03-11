@@ -80,7 +80,7 @@ public class Board {
         }
     }
 
-    // 새로운 빈 랭크 생성
+    // 매번 새로운 빈 랭크 생성
     private Rank makeEmptyRank() {
         Rank rank = new Rank();
         for (int i = 0; i < FILE_SIZE; i++) {
@@ -113,6 +113,7 @@ public class Board {
         }
     }
 
+    // 지정한 위치에 기물 배치
     public void move(String position, Piece piece) {
         try {
             isValidNotation(position);

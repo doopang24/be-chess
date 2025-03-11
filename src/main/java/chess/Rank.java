@@ -43,6 +43,7 @@ public class Rank {
         return RANK.get(index).getRepresentation() == '.';
     }
 
+    // 기물 배치
     public void putPiece(int index, Piece piece) {
         RANK.set(index, piece);
     }
