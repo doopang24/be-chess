@@ -5,7 +5,9 @@ import static utils.StringUtils.appendNewLine;
 import pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Board {
 
@@ -174,17 +176,22 @@ public class Board {
     // 색깔에 따른 점수 계산
     public double calculatePoint(Piece.Color color) {
         double answer = 0.0;
-        boolean pawnDuplicationCheck;
+        Map<Integer, Boolean> pawnDuplicationMap = new HashMap<>();
+
         for (int i = 0; i < FILE_SIZE; i++) {
-            pawnDuplicationCheck = isPawnDuplicatedInFile(color, i);    // 새로줄 내에 폰 중복 여부
+            pawnDuplicationMap.put(i, isPawnDuplicatedInFile(color, i));
+        }
+
+        for (int i = 0; i < FILE_SIZE; i++) {
+            boolean pawnDuplicationCheck = pawnDuplicationMap.get(i);    // 새로줄 내에 폰 중복 여부
             for (int j = 0; j < RANK_SIZE; j++) {
                 Piece piece = BOARD.get(j).findPieceFromRank(i);
                 if (piece.getColor() == color) {
                     if (piece.getType() == Piece.Type.PAWN && pawnDuplicationCheck) {
                         answer += piece.getType().getDefaultPoint() / 2.0;
-                        continue;
+                    } else {
+                        answer += piece.getType().getDefaultPoint();
                     }
-                    answer += piece.getType().getDefaultPoint();
                 }
             }
         }
@@ -193,16 +200,10 @@ public class Board {
 
     // 세로줄 내에 같은 색 폰이 2개 이상 있으면 true
     private boolean isPawnDuplicatedInFile(Piece.Color color, int fileIndex) {
-        Piece piece;
         int count = 0;
-        if (color == Piece.Color.WHITE) {
-            piece = Piece.createWhitePawn();
-        } else {
-            piece = Piece.createBlackPawn();
-        }
-
         for (Rank rank : BOARD) {
-            if (rank.findPieceFromRank(fileIndex).equals(piece)) {
+            Piece piece = rank.findPieceFromRank(fileIndex);
+            if (piece.getColor() == color && piece.getType() == Piece.Type.PAWN) {
                 count++;
                 if (count >= 2) return true;
             }
