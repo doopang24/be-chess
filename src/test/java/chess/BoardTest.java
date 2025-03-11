@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.within;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
@@ -18,6 +19,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("")
     public void findPiece() throws Exception {
         board.initialize();
 
@@ -28,6 +30,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("")
     public void move() throws Exception {
         board.initialize();
 
@@ -39,6 +42,7 @@ public class BoardTest {
     }
 
     @Test
+    @DisplayName("")
     public void calculatePoint() throws Exception {
         board.initializeEmpty();
 
@@ -52,6 +56,7 @@ public class BoardTest {
         addPiece("g2", Piece.createWhitePawn());
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
+
 
         assertThat(board.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
         assertThat(board.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
