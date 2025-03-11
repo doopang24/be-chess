@@ -117,13 +117,9 @@ public class Board {
     public void move(String position, Piece piece) {
         try {
             isValidNotation(position);
-            int rankIndex = converter.fileToIndex(position.charAt(0));
-            int fileIndex = converter.rankToIndex(position.charAt(1));
-            if (BOARD.get(rankIndex).isEmpty(fileIndex)) {
-                BOARD.get(rankIndex).putPiece(fileIndex, piece);
-            } else {
-                throw new IllegalArgumentException("빈 자리가 아닙니다.");
-            }
+            int fileIndex = converter.fileToIndex(position.charAt(0));
+            int rankIndex = converter.rankToIndex(position.charAt(1));
+            BOARD.get(rankIndex).putPiece(fileIndex, piece);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
@@ -157,8 +153,8 @@ public class Board {
         while (true) {
             try {
                 isValidNotation(notation);
-                int rankIndex = converter.fileToIndex(notation.charAt(0));
-                int fileIndex = converter.rankToIndex(notation.charAt(1));
+                int fileIndex = converter.fileToIndex(notation.charAt(0));
+                int rankIndex = converter.rankToIndex(notation.charAt(1));
                 return BOARD.get(rankIndex).findPieceFromRank(fileIndex);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
