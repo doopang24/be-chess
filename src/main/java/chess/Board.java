@@ -13,7 +13,8 @@ public class Board {
 
     private final List<Rank> BOARD = new ArrayList<>();
 
-    private final int BOARD_ROW_SIZE = 8;
+    private final int FILE_SIZE = 8;
+    private final int RANK_SIZE = 8;
     private final int INITIAL_EMPTY_RANK_SIZE = 4;
 
     private Rank whitePiece = new Rank();
@@ -72,7 +73,7 @@ public class Board {
     }
 
     private void makeBlackPawnRank() {
-        for (int i = 0; i < BOARD_ROW_SIZE; i++) {
+        for (int i = 0; i < FILE_SIZE; i++) {
             addBlackPawn(Piece.createBlackPawn());
         }
     }
@@ -80,14 +81,14 @@ public class Board {
     // 새로운 빈 랭크 생성
     private Rank makeEmptyRank() {
         Rank rank = new Rank();
-        for (int i = 0; i < BOARD_ROW_SIZE; i++) {
+        for (int i = 0; i < FILE_SIZE; i++) {
             rank.addRank(Piece.createBlank());
         }
         return rank;
     }
 
     private void makeWhitePawnRank() {
-        for (int i = 0; i < BOARD_ROW_SIZE; i++) {
+        for (int i = 0; i < FILE_SIZE; i++) {
             addWhitePawn(Piece.createWhitePawn());
         }
     }
@@ -105,7 +106,7 @@ public class Board {
 
     public void initializeEmpty() {
         makeEmptyRank();
-        for (int i = 0; i < BOARD_ROW_SIZE; i++) {
+        for (int i = 0; i < RANK_SIZE; i++) {
             BOARD.add(makeEmptyRank());
         }
     }
@@ -124,7 +125,7 @@ public class Board {
     // 출력할 체스판 구성
     public String showBoard() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < BOARD_ROW_SIZE; i++) {
+        for (int i = 0; i < RANK_SIZE; i++) {
             builder.append(BOARD.get(i).getRankView()).append(" ").append(appendNewLine(converter.indexToRank(i)));
         }
         builder.append(appendNewLine("")).append(converter.getFILE());
