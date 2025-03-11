@@ -1,5 +1,7 @@
 package pieces;
 
+import chess.Position;
+
 public class Piece {
 
     public enum Color {
@@ -45,71 +47,73 @@ public class Piece {
     private final Color COLOR;
     private final Type TYPE;
     private final char REPRESENTATION;
+    private final Position position;
 
-    private Piece(Color color, Type type, char representation) {
+    private Piece(Color color, Type type, char representation, Position position) {
         this.COLOR = color;
         this.TYPE = type;
         this.REPRESENTATION = representation;
+        this.position = position;
     }
 
-    private static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type, type.getWhiteRepresentation());
+    private static Piece createWhite(Type type, Position position) {
+        return new Piece(Color.WHITE, type, type.getWhiteRepresentation(), position);
     }
 
-    private static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type, type.getBlackRepresentation());
+    private static Piece createBlack(Type type, Position position) {
+        return new Piece(Color.BLACK, type, type.getBlackRepresentation(), position);
     }
 
-    public static Piece createWhitePawn() {
-        return createWhite(Type.PAWN);
+    public static Piece createWhitePawn(Position position) {
+        return createWhite(Type.PAWN, position);
     }
 
-    public static Piece createBlackPawn() {
-        return createBlack(Type.PAWN);
+    public static Piece createBlackPawn(Position position) {
+        return createBlack(Type.PAWN, position);
     }
 
-    public static Piece createWhiteKnight() {
-        return createWhite(Type.KNIGHT);
+    public static Piece createWhiteKnight(Position position) {
+        return createWhite(Type.KNIGHT, position);
     }
 
-    public static Piece createBlackKnight() {
-        return createBlack(Type.KNIGHT);
+    public static Piece createBlackKnight(Position position) {
+        return createBlack(Type.KNIGHT, position);
     }
 
-    public static Piece createWhiteRook() {
-        return createWhite(Type.ROOK);
+    public static Piece createWhiteRook(Position position) {
+        return createWhite(Type.ROOK, position);
     }
 
-    public static Piece createBlackRook() {
-        return createBlack(Type.ROOK);
+    public static Piece createBlackRook(Position position) {
+        return createBlack(Type.ROOK, position);
     }
 
-    public static Piece createWhiteBishop() {
-        return createWhite(Type.BISHOP);
+    public static Piece createWhiteBishop(Position position) {
+        return createWhite(Type.BISHOP, position);
     }
 
-    public static Piece createBlackBishop() {
-        return createBlack(Type.BISHOP);
+    public static Piece createBlackBishop(Position position) {
+        return createBlack(Type.BISHOP, position);
     }
 
-    public static Piece createWhiteQueen() {
-        return createWhite(Type.QUEEN);
+    public static Piece createWhiteQueen(Position position) {
+        return createWhite(Type.QUEEN, position);
     }
 
-    public static Piece createBlackQueen() {
-        return createBlack(Type.QUEEN);
+    public static Piece createBlackQueen(Position position) {
+        return createBlack(Type.QUEEN, position);
     }
 
-    public static Piece createWhiteKing() {
-        return createWhite(Type.KING);
+    public static Piece createWhiteKing(Position position) {
+        return createWhite(Type.KING, position);
     }
 
-    public static Piece createBlackKing() {
-        return createBlack(Type.KING);
+    public static Piece createBlackKing(Position position) {
+        return createBlack(Type.KING, position);
     }
 
-    public static Piece createBlank() {
-        return new Piece(Color.NOCOLOR, Type.NO_PIECE, Type.NO_PIECE.getBlankRepresentation());
+    public static Piece createBlank(Position position) {
+        return new Piece(Color.NOCOLOR, Type.NO_PIECE, Type.NO_PIECE.getBlankRepresentation(), position);
     }
 
     public Color getColor() {
