@@ -8,26 +8,22 @@ public class LocationConverter {
 
     // 입력받은 file 의 index 반환
     public int fileToIndex(char inputFile) {
-        return findPosition(inputFile, FILE);
+        return FILE.indexOf(inputFile);
     }
 
     // 입력받은 rank 의 index 반환
     public int rankToIndex(char inputRank) {
-        return findPosition(inputRank, RANK);
+        return RANK.indexOf(inputRank);
     }
 
     // 입력받은 위치의 index 찾기
     private int findPosition(char input, String location) {
-        int position = 0;
-        for (int i = 0; i < location.length(); i++) {
-            if (location.indexOf(input) == i) position = i;
-        }
-        return position;
+        return location.indexOf(input);
     }
 
     // 해당 index 의 rank 반환
-    public int indexToRank(int index) {
-        return RANK.charAt(index) - '0';
+    public String indexToRank(int index) {
+        return String.valueOf(RANK.charAt(index) - '0');
     }
 
     public String getFILE() {
