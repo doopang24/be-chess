@@ -47,4 +47,9 @@ public class Rank {
     public void putPiece(int index, Piece piece) {
         RANK.set(index, piece);
     }
+
+    // 기물이 있던 자리에 빈 칸 넣기
+    public void putBlack(int index, Piece emptyPiece) {
+        RANK.set(index, emptyPiece);
+    }
 }
