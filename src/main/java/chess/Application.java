@@ -19,14 +19,16 @@ public class Application {
 
     public static void main(String[] args) {
         Application application = new Application();
-        ChessGame game = new ChessGame();
         Board board = new Board();
+        ChessGame game;
+
 
         String input = application.getInput();
         if (input.equalsIgnoreCase("start")) {
             board.initialize();
         } else if (input.startsWith("move")) {
-            game.move(input);
+            game = new ChessGame(Board.BOARD);
+            game.getSourceAndTarget(input);
         } else {
             System.out.println("게임을 종료합니다.");
         }
