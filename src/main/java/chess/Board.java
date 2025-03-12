@@ -54,9 +54,7 @@ public class Board {
 
         BOARD.add(blackPiece);
         BOARD.add(blackPawn);
-        for (int i = 0; i < INITIAL_EMPTY_RANK_SIZE; i++) {
-            BOARD.add(makeEmptyRank());
-        }
+        makeEmptyRank(INITIAL_EMPTY_RANK_SIZE);
         BOARD.add(whitePawn);
         BOARD.add(whitePiece);
 
@@ -64,53 +62,73 @@ public class Board {
     }
 
     private void makeBlackPieceRank() {
-        addBlackPiece(Piece.createBlackRook());
-        addBlackPiece(Piece.createBlackKnight());
-        addBlackPiece(Piece.createBlackBishop());
-        addBlackPiece(Piece.createBlackQueen());
-        addBlackPiece(Piece.createBlackKing());
-        addBlackPiece(Piece.createBlackBishop());
-        addBlackPiece(Piece.createBlackKnight());
-        addBlackPiece(Piece.createBlackRook());
+        addBlackPiece(Piece.createBlackRook(Position.createPos("a8")));
+        addBlackPiece(Piece.createBlackKnight(Position.createPos("b8")));
+        addBlackPiece(Piece.createBlackBishop(Position.createPos("c8")));
+        addBlackPiece(Piece.createBlackQueen(Position.createPos("d8")));
+        addBlackPiece(Piece.createBlackKing(Position.createPos("e8")));
+        addBlackPiece(Piece.createBlackBishop(Position.createPos("f8")));
+        addBlackPiece(Piece.createBlackKnight(Position.createPos("g8")));
+        addBlackPiece(Piece.createBlackRook(Position.createPos("h8")));
     }
 
     private void makeBlackPawnRank() {
-        for (int i = 0; i < FILE_SIZE; i++) {
-            addBlackPawn(Piece.createBlackPawn());
-        }
-    }
-
-    // 매번 새로운 빈 랭크 생성
-    private Rank makeEmptyRank() {
-        Rank rank = new Rank();
-        for (int i = 0; i < FILE_SIZE; i++) {
-            rank.addRank(Piece.createBlank());
-        }
-        return rank;
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("a7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("b7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("c7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("d7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("e7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("f7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("g7")));
+        addBlackPawn(Piece.createBlackPawn(Position.createPos("h7")));
     }
 
     private void makeWhitePawnRank() {
-        for (int i = 0; i < FILE_SIZE; i++) {
-            addWhitePawn(Piece.createWhitePawn());
-        }
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("a2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("b2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("c2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("d2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("e2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("f2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("g2")));
+        addWhitePawn(Piece.createWhitePawn(Position.createPos("h2")));
     }
 
     private void makeWhitePieceRank() {
-        addWhitePiece(Piece.createWhiteRook());
-        addWhitePiece(Piece.createWhiteKnight());
-        addWhitePiece(Piece.createWhiteBishop());
-        addWhitePiece(Piece.createWhiteQueen());
-        addWhitePiece(Piece.createWhiteKing());
-        addWhitePiece(Piece.createWhiteBishop());
-        addWhitePiece(Piece.createWhiteKnight());
-        addWhitePiece(Piece.createWhiteRook());
+        addWhitePiece(Piece.createWhiteRook(Position.createPos("a1")));
+        addWhitePiece(Piece.createWhiteKnight(Position.createPos("b1")));
+        addWhitePiece(Piece.createWhiteBishop(Position.createPos("c1")));
+        addWhitePiece(Piece.createWhiteQueen(Position.createPos("d1")));
+        addWhitePiece(Piece.createWhiteKing(Position.createPos("e1")));
+        addWhitePiece(Piece.createWhiteBishop(Position.createPos("f1")));
+        addWhitePiece(Piece.createWhiteKnight(Position.createPos("g1")));
+        addWhitePiece(Piece.createWhiteRook(Position.createPos("h1")));
+    }
+
+    // 빈 랭크 생성
+    // 4 -> 6, 5, 4, 3
+    // 8 -> 8, 7, 6, 5, 4, 3, 2, 1
+    private void makeEmptyRank(int emptyRankSize) {
+        int topEmptyRank = 6;
+        if (emptyRankSize == 8) topEmptyRank = 8;
+
+        for (int i = 0; i < emptyRankSize; i++) {
+            String rank = String.valueOf(topEmptyRank - i);
+            Rank emptyRank = new Rank();
+            emptyRank.addRank(Piece.createBlank(Position.createPos("a" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("b" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("c" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("d" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("e" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("f" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("g" + rank)));
+            emptyRank.addRank(Piece.createBlank(Position.createPos("h" + rank)));
+            BOARD.add(emptyRank);
+        }
     }
 
     public void initializeEmpty() {
-        makeEmptyRank();
-        for (int i = 0; i < RANK_SIZE; i++) {
-            BOARD.add(makeEmptyRank());
-        }
+        makeEmptyRank(RANK_SIZE);
     }
 
     // 지정한 위치에 기물 배치
@@ -123,20 +141,6 @@ public class Board {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    // 출력할 체스판 구성
-    public String showBoard() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < RANK_SIZE; i++) {
-            builder.append(BOARD.get(i).getRankView()).append(" ").append(appendNewLine(converter.indexToRank(i)));
-        }
-        builder.append(appendNewLine("")).append(converter.getFILE());
-        return builder.toString();
-    }
-
-    public void printBoard() {
-        System.out.println(showBoard());
     }
 
     // 체스판에 해당 기물이 몇 개 있는지 반환
