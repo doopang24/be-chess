@@ -8,15 +8,13 @@ public class ChessView {    // 출력 담당
 
     private final int RANK_SIZE = 8;
 
-    LocationConverter converter = new LocationConverter();
-
     // 출력할 체스판 구성
-    public String showBoard(List<Rank> board) {
+    public String showBoard(List<Rank> chessBoard) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < RANK_SIZE; i++) {
-            builder.append(board.get(i).getRankView()).append(" ").append(appendNewLine(converter.indexToRank(i)));
+            builder.append(chessBoard.get(i).getRankView()).append(" ").append(appendNewLine(String.valueOf(RANK_SIZE - i)));
         }
-        builder.append(appendNewLine("")).append(converter.getFILE());
+        builder.append(appendNewLine("")).append(Board.FILE);
         return builder.toString();
     }
 
