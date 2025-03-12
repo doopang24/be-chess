@@ -1,5 +1,6 @@
 package chess;
 
+import javax.swing.plaf.PanelUI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -10,10 +11,10 @@ public class Position {
     private final int y;
     private static final Map<String, Position> CACHE = new HashMap<>();
 
-    private Position(String notation) {
+    Position(String notation) {
         isValidNotation(notation);
-        this.x = notation.charAt(0) - 'a' + 1;  // a-h -> 1-8
-        this.y = notation.charAt(1) - '0';      // 1-8 -> 1-8
+        this.x = notation.charAt(0) - 'a';      // a-h -> 0-7
+        this.y = notation.charAt(1) - '1';      // 1-8 -> 0-7
     }
 
     // 팩토리 메소드
@@ -34,6 +35,18 @@ public class Position {
         if (rank < '1' || rank > '8') {
             throw new IllegalArgumentException("올바른 랭크값이 아닙니다.");
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int yValueToIndex() {
+        return 7 - y;
     }
 
     @Override
