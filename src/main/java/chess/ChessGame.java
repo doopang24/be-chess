@@ -8,8 +8,8 @@ public class ChessGame {    // 게임 진행
 
     private final List<Rank> BOARD;
 
-    public ChessGame(List<Rank> board) {
-        this.BOARD = board;
+    public ChessGame(Board board) {
+        this.BOARD = board.getBOARD();
     }
 
     // 지정한 위치에 기물 배치

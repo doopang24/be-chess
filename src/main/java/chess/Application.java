@@ -27,7 +27,7 @@ public class Application {
         if (input.equalsIgnoreCase("start")) {
             board.initialize();
         } else if (input.startsWith("move")) {
-            game = new ChessGame(Board.BOARD);
+            game = new ChessGame(board);
             game.getSourceAndTarget(input);
         } else {
             System.out.println("게임을 종료합니다.");

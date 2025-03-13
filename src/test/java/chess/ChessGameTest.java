@@ -18,7 +18,7 @@ public class ChessGameTest {
         Board board = new Board();
         board.initialize();
 
-        ChessGame game = new ChessGame(Board.BOARD);
+        ChessGame game = new ChessGame(board);
 
         String sourcePosition = "b2";
         String targetPosition = "b3";
