@@ -2,6 +2,8 @@ package pieces;
 
 import chess.Position;
 
+import java.util.Objects;
+
 public class Piece {
 
     public enum Color {
@@ -142,5 +144,10 @@ public class Piece {
         if (obj == null || getClass() != obj.getClass()) return false;
         Piece piece = (Piece) obj;
         return COLOR == piece.COLOR && this.TYPE == piece.TYPE;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(COLOR, TYPE);
     }
 }
