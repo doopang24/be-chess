@@ -11,7 +11,7 @@ public class Board {
     public static final String FILE = "abcdefgh";
     public static final String RANK = "12345678";
 
-    public static final List<Rank> BOARD = new ArrayList<>();
+    private final List<Rank> BOARD = new ArrayList<>();
 
     private final int FILE_SIZE = 8;
     private final int RANK_SIZE = 8;
@@ -23,6 +23,10 @@ public class Board {
     private Rank blackPawn = new Rank();
 
     public int pieceCount = 0;
+
+    public List<Rank> getBOARD() {
+        return BOARD;
+    }
 
     private void addWhitePiece(Piece Piece) {
         whitePiece.addRank(Piece);
@@ -129,57 +133,6 @@ public class Board {
         makeEmptyRank(RANK_SIZE);
         view.printBoard(BOARD);
     }
-
-
-//    // 위치 입력값 검증
-//    private void isValidNotation(String notation) {
-//        if (notation.length() != 2) throw new IllegalArgumentException("올바른 입력이 아닙니다.");
-//        char file = notation.charAt(0);
-//        char rank = notation.charAt(1);
-//        if (!Character.isLetter(file) || !Character.isLowerCase(file)) {
-//            throw new IllegalArgumentException("올바른 파일값이 아닙니다.");
-//        } else if (!Character.isDigit(rank)) {
-//            throw new IllegalArgumentException("올바른 랭크값이 아닙니다.");
-//        }
-//    }
-
-//    // 색깔에 따른 점수 계산
-//    public double calculatePoint(Piece.Color color) {
-//        double answer = 0.0;
-//        Map<Integer, Boolean> pawnDuplicationMap = new HashMap<>();
-//
-//        for (int i = 0; i < FILE_SIZE; i++) {
-//            pawnDuplicationMap.put(i, isPawnDuplicatedInFile(color, i));
-//        }
-//
-//        for (int i = 0; i < FILE_SIZE; i++) {
-//            boolean pawnDuplicationCheck = pawnDuplicationMap.get(i);    // 새로줄 내에 폰 중복 여부
-//            for (int j = 0; j < RANK_SIZE; j++) {
-//                Piece piece = BOARD.get(j).findPieceFromRank(i);
-//                if (piece.getColor() == color) {
-//                    if (piece.getType() == Piece.Type.PAWN && pawnDuplicationCheck) {
-//                        answer += piece.getType().getDefaultPoint() / 2.0;
-//                    } else {
-//                        answer += piece.getType().getDefaultPoint();
-//                    }
-//                }
-//            }
-//        }
-//        return answer;
-//    }
-
-//    // 세로줄 내에 같은 색 폰이 2개 이상 있으면 true
-//    private boolean isPawnDuplicatedInFile(Piece.Color color, int fileIndex) {
-//        int count = 0;
-//        for (Rank rank : BOARD) {
-//            Piece piece = rank.findPieceFromRank(fileIndex);
-//            if (piece.getColor() == color && piece.getType() == Piece.Type.PAWN) {
-//                count++;
-//                if (count >= 2) return true;
-//            }
-//        }
-//        return false;
-//    }
 
     public int getInitialPieceTotalCount() {
         return pieceCount;
