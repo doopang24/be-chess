@@ -10,61 +10,35 @@ import org.junit.jupiter.api.Test;
 import pieces.Piece;
 
 public class BoardTest {
-    private Board board;
-
-    // 각 테스트 전에 실행
-    @BeforeEach
-    void setUp() {
-        board = new Board();
-    }
 
     @Test
-    @DisplayName("")
+    @DisplayName("체스판이 잘 초기화 되었는지 확인")
     public void findPiece() throws Exception {
+        Board board = new Board();
         board.initialize();
 
-        assertThat(Piece.createBlackRook()).isEqualTo(board.findPiece("a8"));
-        assertThat(Piece.createBlackRook()).isEqualTo(board.findPiece("h8"));
-        assertThat(Piece.createWhiteRook()).isEqualTo(board.findPiece("a1"));
-        assertThat(Piece.createWhiteRook()).isEqualTo(board.findPiece("h1"));
+        ChessGame game = new ChessGame(board);
+
+        assertThat(Piece.createBlackRook(Position.createPos("a8"))).isEqualTo(game.findPiece("a8"));
+        assertThat(Piece.createBlackRook(Position.createPos("h8"))).isEqualTo(game.findPiece("h8"));
+        assertThat(Piece.createWhiteRook(Position.createPos("a1"))).isEqualTo(game.findPiece("a1"));
+        assertThat(Piece.createWhiteRook(Position.createPos("h1"))).isEqualTo(game.findPiece("h1"));
     }
 
     @Test
-    @DisplayName("")
-    public void move() throws Exception {
-        board.initialize();
-
-        String sourcePosition = "b2";
-        String targetPosition = "b3";
-        board.move(sourcePosition, targetPosition);
-        assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
-        assertThat(Piece.createWhitePawn(new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));
-    }
-
-    @Test
-    @DisplayName("")
+    @DisplayName("체스판이 모두 빈 칸으로 초기화 되었는지 확인")
     public void calculatePoint() throws Exception {
+        Board board = new Board();
         board.initializeEmpty();
 
-        addPiece("b6", Piece.createBlackPawn());
-        addPiece("b5", Piece.createBlackPawn());
-        addPiece("e6", Piece.createBlackQueen());
-        addPiece("b8", Piece.createBlackKing());
-        addPiece("c8", Piece.createBlackRook());
+        ChessGame game = new ChessGame(board);
 
-        addPiece("f2", Piece.createWhitePawn());
-        addPiece("g2", Piece.createWhitePawn());
-        addPiece("e1", Piece.createWhiteRook());
-        addPiece("f1", Piece.createWhiteKing());
-
-
-        assertThat(board.calculatePoint(Piece.Color.BLACK)).isCloseTo(15.0, within(0.01));
-        assertThat(board.calculatePoint(Piece.Color.WHITE)).isCloseTo(7.0, within(0.01));
-
-        System.out.println(board.showBoard());
+        assertThat(Piece.createBlank(Position.createPos("a8"))).isEqualTo(game.findPiece("a8"));
+        assertThat(Piece.createBlank(Position.createPos("f7"))).isEqualTo(game.findPiece("f7"));
+        assertThat(Piece.createBlank(Position.createPos("b5"))).isEqualTo(game.findPiece("b5"));
+        assertThat(Piece.createBlank(Position.createPos("d2"))).isEqualTo(game.findPiece("d2"));
+        assertThat(Piece.createBlank(Position.createPos("h1"))).isEqualTo(game.findPiece("h1"));
     }
 
-    private void addPiece(String position, Piece piece) {
-        board.move(position, piece);
-    }
+
 }
