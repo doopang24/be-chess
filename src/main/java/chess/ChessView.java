@@ -12,9 +12,9 @@ public class ChessView {    // 출력 담당
     public String showBoard(List<Rank> chessBoard) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < RANK_SIZE; i++) {
-            builder.append(chessBoard.get(i).getRankView()).append(" ").append(appendNewLine(String.valueOf(RANK_SIZE - i)));
+            builder.append(chessBoard.get(i).getRankView()).append("    ").append(appendNewLine(String.valueOf(RANK_SIZE - i)));
         }
-        builder.append(appendNewLine("")).append(Board.FILE);
+        builder.append(appendNewLine("")).append(Board.FILE).append(appendNewLine(""));
         return builder.toString();
     }
 
