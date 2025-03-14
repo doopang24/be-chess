@@ -51,7 +51,7 @@ public enum Direction {
     }
 
     public static List<Direction> knightDirection() {
-        return Arrays.asList(NNE, NNW, SSE, NNW, EEN, EES, WWN, WWS);
+        return Arrays.asList(NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS);
     }
 
     public static List<Direction> whitePawnDirection() {
