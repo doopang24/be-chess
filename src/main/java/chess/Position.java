@@ -1,6 +1,5 @@
 package chess;
 
-import javax.swing.plaf.PanelUI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,18 +10,25 @@ public class Position {
     private final int y;
     private static final Map<String, Position> CACHE = new HashMap<>();
 
-    Position(String notation) {
+    public Position(String notation) {
         isValidNotation(notation);
         this.x = notation.charAt(0) - 'a';      // a-h -> 0-7
         this.y = notation.charAt(1) - '1';      // 1-8 -> 0-7
     }
 
     // 팩토리 메소드
-    public static Position createPos(String notation) {
+    public static Position createWithNotation(String notation) {
         if (!CACHE.containsKey(notation)) {
             (CACHE).put(notation, new Position(notation));
         }
         return CACHE.get(notation);
+    }
+
+    public static Position createWithXY(int x, int y) {
+        StringBuilder builder = new StringBuilder();
+        String file = "abcdefgh";
+        builder.append(file.charAt(x)).append(String.valueOf(y + 1));
+        return createWithNotation(builder.toString());
     }
 
     private void isValidNotation(String notation) {
@@ -47,6 +53,12 @@ public class Position {
 
     public int yValueToIndex() {
         return 7 - y;
+    }
+
+    public String getNotation() {
+        char file = (char) ( x + 'a');
+        char rank = (char) ( y + '1');
+        return String.valueOf(file) + rank;
     }
 
     @Override
