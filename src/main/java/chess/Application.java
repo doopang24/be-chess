@@ -22,13 +22,12 @@ public class Application {
         Board board = new Board();
         ChessGame game;
 
-
         String input = application.getInput();
         if (input.equalsIgnoreCase("start")) {
             board.initialize();
         } else if (input.startsWith("move")) {
             game = new ChessGame(board);
-            game.getSourceAndTarget(input);
+            game.startGame(input);
         } else {
             System.out.println("게임을 종료합니다.");
         }
