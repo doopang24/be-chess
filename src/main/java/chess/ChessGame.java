@@ -7,25 +7,40 @@ import java.util.List;
 public class ChessGame {    // 게임 진행
 
     private final List<Rank> BOARD;
+    private String turn = "white";
+
+    private ChessView view = new ChessView();
 
     public ChessGame(Board board) {
         this.BOARD = board.getBOARD();
     }
 
-    // 지정한 위치에 기물 배치
-    public void move(String sourcePosition, String targetPosition) {
-        Piece piece = findPiece(sourcePosition);
-        if (isAvailable(targetPosition)) {
-            putPieceIntoBoard(targetPosition, piece);
-            putBlankIntoBoard(sourcePosition);
-        }
+    public void startGame(String userCommand) {
+        view.showTurn(turn);
+        getSourceAndTargetPosition(userCommand);
+        view.printBoard(BOARD);
+        turn = turn.equals("white") ? "black" : "white";
     }
 
-    public void getSourceAndTarget(String notation) {
-        String[] moveCommand = notation.split(" ");
-        String sourcePosition = moveCommand[0];
-        String targetPosition = moveCommand[1];
+    private void getSourceAndTargetPosition(String userCommand) {
+        String[] moveCommand = userCommand.split(" ");
+        String source = moveCommand[0];
+        Position sourcePosition = Position.createWithNotation(source);
+        String target = moveCommand[1];
+        Position targetPosition = Position.createWithNotation(target);
         move(sourcePosition, targetPosition);
+    }
+
+    // 지정한 위치에 기물 배치
+    private void move(Position sourcePosition, Position targetPosition) {
+        Piece currentPiece = findPiece(sourcePosition);
+        if (isAvailable(currentPiece, targetPosition) && currentPiece.isMoveable(sourcePosition, targetPosition)) {
+            putPieceIntoBoard(targetPosition, currentPiece);
+            putBlankIntoBoard(sourcePosition);
+            view.printMoveSuccess(currentPiece, sourcePosition, targetPosition);
+            return;
+        }
+        view.printMoveFailure(currentPiece, sourcePosition, targetPosition);
     }
 
     // 체스판에 해당 기물이 몇 개 있는지 반환
@@ -38,33 +53,34 @@ public class ChessGame {    // 게임 진행
     }
 
     // 입력받은 위치에 있는 기물 반환
-    public Piece findPiece(String notation) {
-        Position position = Position.createPos(notation);
+    public Piece findPiece(Position position) {
         int xIndex = position.getX();
         int yIndex = position.yValueToIndex();
         return BOARD.get(yIndex).findPieceFromRank(xIndex);
     }
 
-    // 해당 위치가 빈 칸이면 true
-    public boolean isAvailable(String notation) {
-        Position position = Position.createPos(notation);
+    // 같은 색깔이면 false
+    private boolean isAvailable(Piece piece, Position position) {
         int xIndex = position.getX();
         int yIndex = position.yValueToIndex();
-        Piece piece = BOARD.get(yIndex).findPieceFromRank(xIndex);
-        if (piece.getType() == Piece.Type.NO_PIECE) {
-            return true;
+        if (BOARD.get(yIndex).findPieceFromRank(xIndex).getColor().equals(piece.getColor())) {
+            return false;
         }
-        return false;
+        return true;
     }
 
-    private void putPieceIntoBoard(String notation, Piece piece) {
-        Position position = Position.createPos(notation);
+    private void putPieceIntoBoard(Position position, Piece piece) {
         BOARD.get(position.yValueToIndex()).putPiece(position.getX(), piece);
     }
 
-    private void putBlankIntoBoard(String notation) {
-        Position position = Position.createPos(notation);
-        Piece emptyPiece = Piece.createBlank(Position.createPos(notation));
+    private void putBlankIntoBoard(Position position) {
+        Piece emptyPiece = Piece.createBlank(position);
         BOARD.get(position.yValueToIndex()).putBlack(position.getX(), emptyPiece);
+    }
+
+    public boolean checkSquareClear(int x, int y) {
+        int rankIndex = 7 - y;
+        if (BOARD.get(rankIndex).findPieceFromRank(x).getType().equals(Piece.Type.NO_PIECE)) return true;
+        return false;
     }
 }
