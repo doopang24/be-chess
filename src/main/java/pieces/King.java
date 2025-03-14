@@ -1,5 +1,6 @@
 package pieces;
 
+import chess.ChessGame;
 import chess.Direction;
 import chess.Position;
 
@@ -20,7 +21,7 @@ public class King extends Piece {
     }
 
     // 해당 기물이 목표 지점에 갈 수 있는가?
-    public boolean isMoveable(Position sourcePosition, Position targetPosition) {
+    public boolean isMoveable(Position sourcePosition, Position targetPosition, ChessGame game) {
         List<Direction> moveList = Direction.everyDirection();
         for (Direction direction : moveList) {
             int targetX = POSITION.getX() + direction.getXDegree();

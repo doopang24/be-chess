@@ -1,10 +1,23 @@
 package pieces;
 
+import chess.ChessGame;
 import chess.Position;
 
 import java.util.Objects;
 
-public class Piece {
+public abstract class Piece {
+
+    protected final Position POSITION;
+    protected final Piece.Color COLOR;
+    protected final Piece.Type TYPE;
+    protected final char REPRESENTATION;
+
+    public Piece(Color color, Type type, char representation, Position position) {
+        this.COLOR = color;
+        this.TYPE = type;
+        this.REPRESENTATION = representation;
+        this.POSITION = position;
+    }
 
     public enum Color {
         WHITE,
@@ -44,18 +57,6 @@ public class Piece {
         public char getBlankRepresentation() {
             return representation;
         }
-    }
-
-    private final Color COLOR;
-    private final Type TYPE;
-    private final char REPRESENTATION;
-    private final Position position;
-
-    private Piece(Color color, Type type, char representation, Position position) {
-        this.COLOR = color;
-        this.TYPE = type;
-        this.REPRESENTATION = representation;
-        this.position = position;
     }
 
     private static Piece createWhite(Type type, Position position) {
@@ -98,25 +99,13 @@ public class Piece {
         return createBlack(Type.BISHOP, position);
     }
 
-    public static Piece createWhiteQueen(Position position) {
-        return createWhite(Type.QUEEN, position);
-    }
 
-    public static Piece createBlackQueen(Position position) {
-        return createBlack(Type.QUEEN, position);
-    }
-
-    public static Piece createWhiteKing(Position position) {
-        return createWhite(Type.KING, position);
-    }
-
-    public static Piece createBlackKing(Position position) {
-        return createBlack(Type.KING, position);
-    }
 
     public static Piece createBlank(Position position) {
         return new Piece(Color.NOCOLOR, Type.NO_PIECE, Type.NO_PIECE.getBlankRepresentation(), position);
     }
+
+    public abstract boolean isMoveable(Position sourcePosition, Position targetPosition, ChessGame game);
 
     public Color getColor() {
         return COLOR;
