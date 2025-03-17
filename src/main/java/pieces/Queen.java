@@ -3,9 +3,7 @@ package pieces;
 import chess.ChessGame;
 import chess.Direction;
 import chess.Position;
-import chess.Rank;
 
-import javax.swing.*;
 import java.util.List;
 
 public class Queen extends Piece {

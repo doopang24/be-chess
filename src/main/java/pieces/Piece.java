@@ -91,13 +91,6 @@ public abstract class Piece {
         return createBlack(Type.ROOK, position);
     }
 
-    public static Piece createWhiteBishop(Position position) {
-        return createWhite(Type.BISHOP, position);
-    }
-
-    public static Piece createBlackBishop(Position position) {
-        return createBlack(Type.BISHOP, position);
-    }
 
 
 
